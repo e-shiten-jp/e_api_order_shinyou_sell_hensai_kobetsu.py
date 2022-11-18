@@ -32,7 +32,7 @@ APIバージョン： v4r3で動作確認
 
 ５）実行内容は、以下になります。
 
-  5-1）ログインして仮想URL（request, master, price, event）を取得。
+  	5-1）ログインして仮想URL（request, master, price, event）を取得。
   
 	5-2）信用返済買い注文（建玉個別指定）を発注。
   
