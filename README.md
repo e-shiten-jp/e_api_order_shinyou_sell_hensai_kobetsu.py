@@ -1,5 +1,5 @@
 # e_api_neworder_sell_shinyou_hensai_kobetsu.py
-ｅ支店APIで、信用返済買い注文（建玉個別指定）を発注する。
+ｅ支店APIで、信用返済売り注文（建玉個別指定）を発注する。
 
 ファイル名: e_api_neworder_sell_shinyou_hensai_kobetsu.py
 
@@ -34,7 +34,7 @@ APIバージョン： v4r3で動作確認
 
   	5-1）ログインして仮想URL（request, master, price, event）を取得。
   
-	5-2）信用返済買い注文（建玉個別指定）を発注。
+	5-2）信用返済売り注文（建玉個別指定）を発注。
   
 	5-3）ログアウトを実行。
   
