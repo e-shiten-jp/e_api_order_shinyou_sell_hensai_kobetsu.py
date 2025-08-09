@@ -1,4 +1,4 @@
-# e_api_order_shinyou_sell_hensai_kobetsu.py
+# e_api_order_shinyou_sell_hensai_kobetsu_tel.py
 電話認証対応　信用返済売り注文（建玉個別指定）
 
 ご注意！！ ================================
