@@ -1,9 +1,5 @@
-# e_api_neworder_sell_shinyou_hensai_kobetsu.py
-ｅ支店APIで、信用返済売り注文（建玉個別指定）を発注する。
-
-ファイル名: e_api_neworder_sell_shinyou_hensai_kobetsu.py
-
-APIバージョン： v4r3で動作確認
+# e_api_order_shinyou_sell_hensai_kobetsu.py
+電話認証対応　信用返済売り注文（建玉個別指定）
 
 ご注意！！ ================================
 
@@ -11,33 +7,62 @@ APIバージョン： v4r3で動作確認
 	市場で条件が一致して約定した場合、取り消せません。
 	十分にご注意いただき、ご利用ください。
 
-=========================================
+===========================================
 
 
-1）動作テストを実行した環境は、os: Centos7.4、python: 3.6.8 です。
+
+１）動作テストを実行した環境
+
+	APIバージョン： v4r7
+	python:3.11.2 / os:debian12
 
 ２）事前に立花証券ｅ支店に口座開設が必要です。
-
+  
 ３）利用時に変数を設定してください。
+		
+		# 必要な設定項目
+		# 銘柄コード: my_sIssueCode （実際の銘柄コードを入れてください。）
+		# 市場: my_sSizyouC （00:東証   現在(2021/07/01)、東証のみ可能。）
+		# 執行条件: my_sCondition   （0:指定なし、2:寄付、4:引け、6:不成。指し値は、0:指定なし。）
+		# 注文値段: my_sOrderPrice  （*:指定なし、0:成行、上記以外は、注文値段。小数点については、関連資料:「立花証券・e支店・API、REQUEST I/F、マスタデータ利用方法」の「2-12. 呼値」参照。）
+		# 注文数量: my_sOrderSuryou
+		#
+		# 明細指定（aCLMKabuHensaiData）
+		# # No1 ---------
+		# my_sTatebiZyuni = '1'                     # 28- 2 sTatebiZyuni 建日順位。1,2,3と返済優先順位を付ける。
+		# my_sTategyokuNumber = '000000000000000'   # 28- 1 sTategyokuNumber 新規建玉番号（CLMShinyouTategyokuListのsOrderTategyokuNumber）
+		# my_meisai_suryou = '000'                  # 28- 3 sOrderSuryou 注文数量。建玉株数のうちこの優先順位に指定する株数。
+		# # class_hensai_data.append(class_def_hensai_data())     # No1は、拡張が不要。No2以降必要。
+		# class_hensai_data[-1].add_data(my_sTategyokuNumber, my_sTatebiZyuni, my_meisai_suryou)    # パラメーターを格納。
+		# -------------
+		# # No2 ---------
+		# my_sTatebiZyuni = '2'
+		# my_sTategyokuNumber = '000000000000000'
+		# my_meisai_suryou = '000'
+		# class_hensai_data.append(class_def_hensai_data())     # No2以降、必要。
+		# class_hensai_data[-1].add_data(my_sTategyokuNumber, my_sTatebiZyuni, my_meisai_suryou)
+		# # -------------
+		# 
+		# 備考:
+		#   注文数量（my_kabusuu）と、明細の数量（my_meisai_suryou）の合計が、
+		#   一致している必要があります。
+		#
+		#   必要な明細分を
+		#   「# NoXX ---------」から
+		#   「# -------------」まで
+		#   セットでコピーして追加する。
+		#   No1のみリストの拡張（append）の行は不要。
 
-	コードの開始部分の「利用時に変数を設定してください」のセクションで、
-  
-	変数、url_base、my_userid等を実際のurl、ご自身のユーザーID、パスワード等に変更してください。
-  
-	変更しない場合、APIを利用できません。
 
+４)実行は、設定ファイルや「e_api_login_tel.py」と同じディレクトリで実行してください。
 
-４)実行はコマンドプロンプト等からpython環境で起動してください。
-
+	事前に
+ 	「電話認証＋e_api_login_tel.py実行」
+  	で、仮想URL（１日券）を取得しておいてください。
 
 ５）実行内容は、以下になります。
 
-  	5-1）ログインして仮想URL（request, master, price, event）を取得。
-  
-	5-2）信用返済売り注文（建玉個別指定）を発注。
-  
-	5-3）ログアウトを実行。
-  
+	信用 売り 返済 注文（建玉個別指定）を発注。
 	上記に付随して、送信データや受信データを適宜print()文で出力します。
 
 
