@@ -793,6 +793,21 @@ def func_neworder_sell_sinyou_close_kobetsu(int_p_no,
 # 注文数量: my_sOrderSuryou
 #
 # 明細指定（aCLMKabuHensaiData）
+# # No1 ---------
+# my_sTatebiZyuni = '1'                     # 28- 2 sTatebiZyuni 建日順位。1,2,3と返済優先順位を付ける。
+# my_sTategyokuNumber = '000000000000000'   # 28- 1 sTategyokuNumber 新規建玉番号（CLMShinyouTategyokuListのsOrderTategyokuNumber）
+# my_meisai_suryou = '000'                  # 28- 3 sOrderSuryou 注文数量。建玉株数のうちこの優先順位に指定する株数。
+# # class_hensai_data.append(class_def_hensai_data())     # No1は、拡張が不要。No2以降必要。
+# class_hensai_data[-1].add_data(my_sTategyokuNumber, my_sTatebiZyuni, my_meisai_suryou)    # パラメーターを格納。
+# -------------
+# # No2 ---------
+# my_sTatebiZyuni = '2'
+# my_sTategyokuNumber = '000000000000000'
+# my_meisai_suryou = '000'
+# class_hensai_data.append(class_def_hensai_data())     # No2以降、必要。
+# class_hensai_data[-1].add_data(my_sTategyokuNumber, my_sTatebiZyuni, my_meisai_suryou)
+# # -------------
+# 
 # 備考:
 #   注文数量（my_kabusuu）と、明細の数量（my_meisai_suryou）の合計が、
 #   一致している必要があります。
@@ -800,7 +815,7 @@ def func_neworder_sell_sinyou_close_kobetsu(int_p_no,
 #   必要な明細分を
 #   「# NoXX ---------」から
 #   「# -------------」まで
-#   セットでコピーして利用する。
+#   セットでコピーして追加する。
 #   No1のみリストの拡張（append）の行は不要。
 
 if __name__ == "__main__":
